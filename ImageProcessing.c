@@ -3,15 +3,24 @@
 #include<unistd.h>
 
 int main(){
-	char* command="ls";
-	char* argument_list[]={"ls","-l",NULL};
+	char* command1="ls";
+	char* argument_list1[]={"ls","-l",NULL};
+	char* command2="touch" ;
+	char* argument_list2[]={"touch","new_file.c",NULL};
 	//char* argument_list[]={NULL};
 	printf("Before calling execvp()\n");
 	printf("Creating another process using fork()..\n");
 
-	if(fork()==0){
+	int p = fork();
+	if(p > 0){
+		printf("Execution inside parent process.\n");
+		execvp(command1,arguments
+			_list1);
+	}
+	else if(p==0){
 		//sleep(2);
-		int status_code = execvp(command, argument_list);
+		printf("Inside child process.\n");
+		int status_code = execvp(command2, argument_list2);
 		//execvp() will take control of the process
 		if(status_code==-1){
 			printf("Process did not terminate correctly\n");
